@@ -504,6 +504,7 @@ body{
 .read_area{
     display: none;
     height: 100%;
+    animation: cool ease-in-out 0.5s;
 }
 
 .read_area .note_heading{

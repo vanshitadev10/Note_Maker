@@ -12,7 +12,7 @@ $(document).ready(() => {
         $('.begin').show();
         $('.read_area').hide();
         $('.main_page').hide();
-        $('.btn').click(() => ShowPage());
+        $('.btn').click(() => showPage());
     }
     else {
         for (let i = 0; i < m; i++) {
