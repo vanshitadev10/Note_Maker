@@ -1,0 +1,566 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Courgette', cursive;
+    background-color: rgb(253, 241, 226);
+}
+
+
+/* First Page (appearing only once) */
+.begin::before{
+    content: "";
+    background: url(Images/background.jpg) no-repeat center 30%/cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+    z-index: -1;
+}
+
+.begin{
+    width: 60%;
+    margin-top: 32vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: 17%;
+    display: none;
+}
+
+.begin .heading{
+    font-family: 'Courgette', cursive;
+    font-size: 4.5rem;
+    color: rgb(99, 25, 25);
+}
+
+.begin .quote{
+    margin-top: 20px;
+    color: rgb(170, 64, 6);
+    font-size: 2.5rem;
+}
+
+.begin .btn{
+    padding: 4px;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    font-size: 1.7rem;
+    color: rgb(99, 25, 25);
+    border: 3px solid rgb(99, 25, 25);
+    background-color: rgb(252, 217, 182);
+    border-radius: 10px;
+    font-weight: normal;
+}
+
+.begin .btn:hover{
+    cursor: pointer;
+    background-color: rgb(252, 232, 212);
+}
+
+
+@media only screen and (max-width: 1200px){
+    .begin .heading{
+        font-size: 3.5rem;
+    }
+    .begin .quote{
+        font-size: 2rem;
+    }
+    .begin .btn{
+        font-size: 1.2rem;
+        margin-top: 3rem;
+    }
+}
+@media only screen and (max-width: 768px){
+    .begin::before{
+        background: url(Images/background.jpg) no-repeat 10% 30%/cover;
+    }
+    .begin{
+        width: 60%;
+        margin-right: 10%;
+        margin-left: 30%;
+    }
+}
+@media only screen and (max-width: 675px){
+    .begin .heading{
+        font-size: 2.2rem;
+    }
+    .begin .quote{
+        font-size: 1.3rem;
+    }
+    .begin .btn{
+        font-size: 0.8rem;
+        margin-top: 3rem;
+        border: 2px solid rgb(99, 25, 25);
+    }
+}
+
+
+
+/* Main Page Where Notes Are Stored */
+.main_page{
+    display: grid;
+    grid-template-columns: 1fr 0.15fr;
+    justify-items: space-between;
+    align-items: center;
+    animation: cool ease-in-out 0.5s;
+}
+
+.main_page .main_heading{
+    font-size: 4rem;
+    color: rgb(99, 25, 25);
+    padding: 10px;
+}
+
+.main_page .top-btns .main_btn{
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    font-size: 1.5rem;
+    color: rgb(99, 25, 25);
+    border: 3px solid rgb(99, 25, 25);
+    background-color: rgb(252, 217, 182);
+    border-radius: 10px;
+    font-weight: normal;
+}
+
+.main_page .top-btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main_page .main_btn:hover{
+    cursor: pointer;
+    background-color: rgb(252, 232, 212);
+}
+
+.main_page .saved{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 10px;
+}
+
+.sticker{
+    height: 30vh;
+    background: url(Images/background.jpg) no-repeat top center/cover;
+    font-size: 2rem;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    border-radius: 16px;
+    width: 100%;
+}
+.sticker:last-child{
+    margin-bottom: 2rem;
+}
+
+.sticker .editing_options{
+    width: 15%;
+    border: 1px solid black;
+    border-radius: 4px;
+    height: 30px;
+    padding: 2.5px 0;
+}
+
+.sticker .editing_options:hover{
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+.sticker .editing_options img{
+    width: 20px;
+}
+
+.sticker .name{
+    font-family: 'Balsamiq Sans', cursive;
+    margin-top: 1.5rem;
+}
+
+.note_area{
+    display: none;
+    animation: cool ease-in-out 0.5s;
+}
+
+.arrow{
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    width: 50px;
+    height: 5.5%;
+    border: 3px solid rgb(99, 25, 25);
+    background-color: rgb(252, 217, 182);
+    border-radius: 10px;
+}
+
+.arrow img{
+    width: 70%;
+}
+
+.arrow:hover{
+    cursor: pointer;
+    background-color: rgb(252, 232, 212);
+}
+
+
+@media only screen and (max-width: 1200px){
+    .main_page .saved{
+        grid-template-columns: 1fr 1fr;
+    }
+    .main_page .main_heading{
+        font-size: 3rem;
+    }
+    .main_page .top-btns .main_btn{
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .arrow{
+        width: 40px;
+        height: 4.8%;
+    }
+    .arrow img{
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 576px){
+    .main_page{
+        grid-template-columns: 1fr;
+    }
+    .main_page .saved{
+        display: flex;
+        flex-direction: column;
+    }
+    .main_page .main_heading{
+        font-size: 2.5rem;
+    }
+    .main_page .top-btns .main_btn{
+        font-size: 1rem;
+    }
+}
+
+
+/* Text Area */
+.note_area .note_title{
+    font-size: 3.5rem;
+    color: rgb(99, 25, 25);
+    padding: 10px;
+    margin-left: 19%;
+    margin-right: 19%;
+}
+
+.note_area .note_title .title{
+    resize: none;
+    font-size: 1.8rem;
+    margin-left: 2rem;
+    padding: 4px;
+    border: none;
+    border-bottom: 3px solid rgb(99, 25, 25);
+    background-color:rgb(253, 241, 226);
+}
+
+.title:focus-visible{
+    outline: 2px solid rgb(253, 241, 226);
+    background: rgb(255, 215, 166);
+}
+
+.note_area .note_title .save_btn{
+    width: fit-content;
+    height: fit-content;
+    padding: 4px;
+    font-size: 1.5rem;
+    color: rgb(99, 25, 25);
+    border: 3px solid rgb(99, 25, 25);
+    background-color: rgb(252, 217, 182);
+    border-radius: 10px;
+    font-weight: normal;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+.note_area .note_title .save_btn:hover{
+    cursor: pointer;
+    background-color: rgb(252, 232, 212);
+}
+
+.text:empty::before{
+    content: attr(data-placeholder);
+    color: grey;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.note_area .text{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    height: 65vh;
+    width: 70%;
+    border: 2px solid black;
+    margin-left: 14%;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    text-align: left;
+    text-transform: none;
+    display: inline-block;
+    list-style-type: circle;
+    margin-bottom: 5rem;
+    overflow: auto;
+}
+
+.note_area .text::marker{
+    font-size: 0px;
+}
+
+.bold_text{
+    font-weight: bold;
+}
+
+.underline_text{
+    text-decoration: underline;
+}
+
+.italic_text{
+    font-style: italic;
+}
+
+.lineThrough_text{
+    text-decoration: line-through;
+}
+
+
+@media only screen and (max-width: 1200px){
+    .note_area .note_title{
+        margin: 0;
+        margin-top: 4rem;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .note_area .note_title{
+        font-size: 2.5rem;
+    }
+    .note_area .note_title .title{
+        font-size: 1.5rem;
+        width: 80%;
+    }
+    .note_area .note_title .save_btn{
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 576px){
+    .note_area .text{
+        width: 80%;
+        margin-left: 8%;
+    }
+}
+
+
+/* Extra Tools */
+.note_area .extras{
+    display: none;
+    background-color: rgb(255, 204, 153);
+    text-align: center;
+    position: fixed;
+    padding: 2px;
+    padding-top: 4px;
+    bottom: 68px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.note_area .extras .codes{
+    font-family: 'Balsamiq Sans', cursive;
+    width: fit-content;
+    padding: 2px;
+    height: fit-content;
+    border: none;
+    background-color: rgb(255, 204, 153);
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    padding-top: 3px;
+}
+
+.note_area .extras .codes:hover{
+    cursor: pointer;
+}
+
+.note_area .codes .imges{
+    width: 40px;
+}
+
+.note_area .codes .back{
+    width: 100%;
+}
+
+.note_area .extras .cod{
+    font-family: 'Playball', cursive;
+    width: 2%;
+    height: fit-content;
+    border: none;
+    background-color: rgb(255, 204, 153);
+    font-size: 1.3rem;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+}
+
+
+@media only screen and (max-width: 992px){
+    .note_area .extras{
+        bottom: 53px;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+    }
+    .note_area .extras .codes{
+        font-size: 1rem;
+        margin: 0 10%;
+        gap: 1rem;
+    }
+    .note_area .extras .cod{
+        font-size: 1rem;
+    }
+    .note_area .extras .codes p, .note_area .extras .cod p{
+        display: none;
+    }
+}
+
+
+/* Main Tools */
+.note_area .tools{
+    background-color: rgb(252, 217, 182);
+    padding: 7px;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.note_area .tools .btns{
+    width: 2%;
+    height: fit-content;
+    border: 2px solid rgb(252, 217, 182);
+    background-color: rgb(252, 217, 182);
+}
+
+.note_area .tools .btns img{
+    width: 100%;
+}
+
+.note_area .tools .btns:hover{
+    cursor: pointer;
+}
+
+.note_area .tools .exp{
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    color: white;
+    padding: 2px;
+    border: 2px solid black;
+    border-radius: 2px;
+    font-size: 1rem;
+    position: fixed;
+    bottom: 64px;
+    animation: cool ease-in-out 0.5s;
+}
+
+
+@media only screen and (max-width: 576px){
+    .note_area .tools .btns{
+        width: 5%;
+    }
+    .note_area .tools .exp{
+        font-size: 0.5rem;
+        bottom: 56px;
+    }
+}
+
+
+/* Editing Area */
+.read_area{
+    display: none;
+    height: 100%;
+}
+
+.read_area .note_heading{
+    font-family: 'Balsamiq Sans', cursive;
+    margin: 0 2rem;
+    font-size: 4rem;
+    text-decoration: underline;
+    color: rgb(99, 25, 25);
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.read_area .note_text .text{
+    height: 80vh;
+    width: 90vw;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    border-radius: 8px;
+    overflow: auto;
+}
+
+
+@media only screen and (max-width: 576px){
+    .read_area .note_heading{
+        font-size: 3rem;
+        margin-top: 4rem;
+    }
+}
+
+
+/* Page Transition Animation */
+@keyframes cool{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+
+/* Footer */
+footer{
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 768px){
+    footer{
+        font-size: 0.7rem;
+    }
+}

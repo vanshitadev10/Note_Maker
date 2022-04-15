@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yuji+Mai&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+    <title>Note-Maker</title>
+</head>
+
+<body>
+    <div class="begin">
+        <h1 class="heading">Welcome To The F-Notes Maker</h1>
+        <h2 class="quote">There Is No Greater Agony Than Bearing An Untold Story Inside Of You</h2>
+        <button class="btn">Let's Paint Your Voice...</button>
+    </div>
+
+    <div class="main_page">
+        <h1 class="main_heading">Your Notes:</h1>
+        <div class="top-btns">
+            <button class="main_btn">+ Create New</button>
+        </div>
+        <div class="saved">
+        </div>
+    </div>
+
+    <div class="note_area">
+        <button class="arrow"><img src="Images/arrow.png"></button>
+        <h1 class="note_title">Title :-
+            <textarea class="title" rows="1" cols="40"></textarea>
+            <button class="save_btn">Save</button>
+        </h1>
+        <div class="mytext"><div class="text" contenteditable="true" data-placeholder="Start here..."></div></div>
+        <div class="extras"></div>
+        <div class="tools">
+            <button class="btns wallpaper"><img src="Images/wallpaper.png"></button>
+            <p class="exp wall_exp">Background</p>
+            <button class="btns color_change"><img src="Images/color.png"></button>
+            <p class="exp tex_col">Change Text Color</p>
+            <button class="btns size"><img src="Images/size.png"></button>
+            <p class="exp fs">Font Size</p>
+            <button class="btns font_style"><img src="Images/font.png"></button>
+            <p class="exp fon">Font Style</p>
+            <button class="btns bullet"><img src="Images/bullet.png"></button>
+            <p class="exp bull">Bullets And Symbols</p>
+            <button class="btns capital"><img src="Images/capitalize.png"></button>
+            <p class="exp capi">Capitalize</p>
+            <button class="btns left_align"><img src="Images/left.png"></button>
+            <p class="exp lefta">Left Align</p>
+            <button class="btns center_align"><img src="Images/center.png"></button>
+            <p class="exp centera">Center Align</p>
+            <button class="btns right_align"><img src="Images/right.png"></button>
+            <p class="exp righta">Right Align</p>
+            <button class="btns text_bold"><img src="Images/bold.png"></button>
+            <p class="exp bol">Bold</p>
+            <button class="btns text_underline"><img src="Images/underline.png"></button>
+            <p class="exp under">Underline</p>
+            <button class="btns text_italic"><img src="Images/italic.png"></button>
+            <p class="exp ita">Italic</p>
+            <button class="btns line_through"><img src="Images/through.png"></button>
+            <p class="exp lin">Line Through</p>
+            <button class="btns text_clear"><img src="Images/clear.png"></button>
+            <p class="exp clr">Clear Text</p>
+        </div>
+    </div>
+
+
+    <div class="read_area">
+        <button class="arrow"><img src="Images/arrow.png"></button>
+        <h3 class="note_heading"></h3>
+        <div class="note_text"></div>
+    </div>
+
+
+    <footer>Created by Vanshita Dev | ©2021 All Rights</footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
