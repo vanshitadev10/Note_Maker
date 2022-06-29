@@ -174,6 +174,49 @@ $(document).ready(() => {
 
 
 
+    //  Functions for Changing Font-color, Font-size, Font-style and making text Capitalize, Bold, Italic, Underlined and Line-Through Text
+
+    function textTransformation(str, yes) {
+        let highlight = window.getSelection();
+        if ($(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0] === 'undefined' && ($(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0].classList.contains(`${str}`) && $(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0].classList.contains(`${str}`))) {
+            let changedText;
+            if (yes) {
+                changedText = `<span class = '${str}'>` + $(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0].innerHTML + highlight + $(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0].innerHTML + `</span>`;
+            } else {
+                changedText = `<span style = '${str}'>` + $(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0].innerHTML + highlight + $(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0].innerHTML + `</span>`;
+            }
+            $($(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0]).replaceWith(changedText);
+            $($(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0]).remove();
+            $(window.getSelection().getRangeAt(0).commonAncestorContainer).replaceWith('');
+        }
+
+        else {
+            let highlight = window.getSelection();
+            let changedText;
+            if (yes) {
+                changedText = `<span class = '${str}'>` + highlight + `</span>`;
+            } else {
+                changedText = `<span style = '${str}'>` + highlight + `</span>`;
+            }
+            myText.innerHTML = myText.innerHTML.replace(window.getSelection(), changedText);
+        }
+    }
+
+    function textUNDOTransformation(str) {
+        if (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.classList.contains(`${str}`) && (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.innerHTML.length !== window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.textContent.substring(window.getSelection().extentOffset, window.getSelection().anchorOffset).length)) {
+            let highlight = window.getSelection();
+            let changedText = `<span class = '${str}'>` + window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.textContent.substring(0, window.getSelection().extentOffset) + `</span>` + highlight + `<span class = '${str}'>` + window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.textContent.substring(window.getSelection().anchorOffset, window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.innerHTML.length) + `</span>`;
+            $(window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement).replaceWith(changedText);
+        }
+        else {
+            let inner = window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.innerHTML;
+            window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.replaceWith(inner);
+        }
+    }
+
+
+
+
     //  Change Wallpaper
 
     $('.wallpaper').mouseenter(() => {
@@ -340,13 +383,6 @@ $(document).ready(() => {
         $(myText).css('color', `${str}`);
     }
 
-    function changeColor(str) {
-        let highlight = window.getSelection();
-        let span = `<span style="color: ${str}">` + highlight + `</span>`;
-        myText.innerHTML = myText.innerHTML.replace(window.getSelection(), span);
-    }
-
-
     $('.color_change').click(() => {
         if (extras.style.display != 'flex') {
 
@@ -360,7 +396,7 @@ $(document).ready(() => {
                 let y = document.getElementById('col_text').value;
 
                 if (finish - start != 0) {
-                    changeColor(y);
+                    textTransformation(`color: ${y}`, false);
                 }
                 else {
                     text_color(y);
@@ -400,20 +436,13 @@ $(document).ready(() => {
         $(str).css('background-color', 'rgb(252, 174, 95)');
     }
 
-
-    function changeSize(str) {
-        let highlight = window.getSelection();
-        let span = `<span style="font-size: ${str}px">` + highlight + `</span>`;
-        myText.innerHTML = myText.innerHTML.replace(window.getSelection(), span);
-        clicking2(str);
-    }
-
     function sizeAlteration(num, size_arr) {
         let start = window.getSelection().focusOffset;
         let finish = window.getSelection().anchorOffset;
 
         if (finish - start != 0) {
-            changeSize(num);
+            textTransformation(`font-size: ${num}px`, false);
+            clicking2(str);
         }
         else {
             text_size(num, size_arr);
@@ -501,19 +530,12 @@ $(document).ready(() => {
         $(myText).css('font-family', `${str}`);
     }
 
-
-    function changeFont(str) {
-        let highlight = window.getSelection();
-        let span = `<span style="font-family: ${str}">` + highlight + `</span>`;
-        myText.innerHTML = myText.innerHTML.replace(window.getSelection(), span);
-    }
-
     function fontAlteration(str, size_arr) {
         let start = window.getSelection().focusOffset;
         let finish = window.getSelection().anchorOffset;
 
         if (finish - start != 0) {
-            changeFont(str);
+            textTransformation(`font-family: ${str}`, false);
         }
         else {
             text_font(str, size_arr);
@@ -658,15 +680,24 @@ $(document).ready(() => {
 
     $('.capital').click(() => {
 
-        if (myText.style.textTransform === "capitalize") {
-            $('.text').css('text-transform', 'none');
-            $('.capital').css('background-color', 'rgb(252, 217, 182)');
-            $('.capital').css('border', 'none');
+        let start = window.getSelection().focusOffset;
+        let finish = window.getSelection().anchorOffset;
+
+        if (finish - start != 0) {
+            textTransformation(`text-transform: capitalize`, false);
+            clicking1('.capital');
         }
         else {
-            $('.text').css('text-transform', 'capitalize');
-            $('.capital').css('background-color', 'rgb(255, 184, 112)');
-            $('.capital').css('border', '2px solid rgb(99, 25, 25)');
+            if (myText.style.textTransform === "capitalize") {
+                $('.text').css('text-transform', 'none');
+                $('.capital').css('background-color', 'rgb(252, 217, 182)');
+                $('.capital').css('border', 'none');
+            }
+            else {
+                $('.text').css('text-transform', 'capitalize');
+                $('.capital').css('background-color', 'rgb(255, 184, 112)');
+                $('.capital').css('border', '2px solid rgb(99, 25, 25)');
+            }
         }
 
     })
@@ -769,38 +800,6 @@ $(document).ready(() => {
 
 
 
-    //  Functions for Bold, Italic, Underlined and Line-Through Text
-
-    function textTransformation(str) {
-        let highlight = window.getSelection();
-        if ($(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0] === 'undefined' && ($(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0].classList.contains(`${str}`) && $(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0].classList.contains(`${str}`))) {
-            let changedText = `<span class = '${str}'>` + $(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0].innerHTML + highlight + $(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0].innerHTML + `</span>`;
-            $($(window.getSelection().getRangeAt(0).commonAncestorContainer).prev()[0]).replaceWith(changedText);
-            $($(window.getSelection().getRangeAt(0).commonAncestorContainer).next()[0]).remove();
-            $(window.getSelection().getRangeAt(0).commonAncestorContainer).replaceWith('');
-        }
-        else {
-            let highlight = window.getSelection();
-            let changedText = `<span class = '${str}'>` + highlight + `</span>`;
-            myText.innerHTML = myText.innerHTML.replace(window.getSelection(), changedText);
-        }
-    }
-
-    function textUNDOTransformation(str) {
-        if (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.classList.contains(`${str}`) && (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.innerHTML.length !== window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.textContent.substring(window.getSelection().extentOffset, window.getSelection().anchorOffset).length)) {
-            let highlight = window.getSelection();
-            let changedText = `<span class = '${str}'>` + window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.textContent.substring(0, window.getSelection().extentOffset) + `</span>` + highlight + `<span class = '${str}'>` + window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.textContent.substring(window.getSelection().anchorOffset, window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.innerHTML.length) + `</span>`;
-            $(window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement).replaceWith(changedText);
-        }
-        else {
-            let inner = window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.innerHTML;
-            window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.replaceWith(inner);
-        }
-    }
-
-
-
-
 
     //  Making Text Bold
 
@@ -813,15 +812,6 @@ $(document).ready(() => {
         $('.bol').hide();
     })
 
-    function makeBold() {
-        textTransformation('bold_text');
-    }
-
-    function unBold() {
-        textUNDOTransformation('bold_text');
-    }
-
-
     $('.text_bold').click(() => {
 
         let start = window.getSelection().focusOffset;
@@ -829,10 +819,10 @@ $(document).ready(() => {
 
         if (finish - start != 0) {
             if (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.classList.contains('bold_text')) {
-                unBold();
+                textUNDOTransformation('bold_text');
             }
             else {
-                makeBold();
+                textTransformation('bold_text', true);
             }
         }
 
@@ -865,15 +855,6 @@ $(document).ready(() => {
         $('.under').hide();
     })
 
-    function makeUnderlined() {
-        textTransformation('underline_text');
-    }
-
-    function unUnderlined() {
-        textUNDOTransformation('underline_text');
-    }
-
-
     $('.text_underline').click(() => {
 
         let start = window.getSelection().focusOffset;
@@ -882,10 +863,10 @@ $(document).ready(() => {
         if (finish - start != 0) {
 
             if (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.classList.contains('underline_text')) {
-                unUnderlined();
+                textUNDOTransformation('underline_text');
             }
             else {
-                makeUnderlined();
+                textTransformation('underline_text', true);
             }
         }
 
@@ -921,15 +902,6 @@ $(document).ready(() => {
         $('.ita').hide();
     })
 
-    function makeItalic() {
-        textTransformation('italic_text');
-    }
-
-    function unItalic() {
-        textUNDOTransformation('italic_text');
-    }
-
-
     $('.text_italic').click(() => {
 
         let start = window.getSelection().focusOffset;
@@ -938,10 +910,10 @@ $(document).ready(() => {
         if (finish - start != 0) {
 
             if (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.classList.contains('italic_text')) {
-                unItalic();
+                textUNDOTransformation('italic_text');
             }
             else {
-                makeItalic();
+                textTransformation('italic_text', true);
             }
         }
 
@@ -975,15 +947,6 @@ $(document).ready(() => {
         $('.lin').hide();
     })
 
-    function makeLine() {
-        textTransformation('lineThrough_text');
-    }
-
-    function unLine() {
-        textUNDOTransformation('lineThrough_text');
-    }
-
-
     $('.line_through').click(() => {
 
         let start = window.getSelection().focusOffset;
@@ -992,10 +955,10 @@ $(document).ready(() => {
         if (finish - start != 0) {
 
             if (window.getSelection().getRangeAt(0).commonAncestorContainer.parentElement.classList.contains('line_text')) {
-                unLine();
+                textUNDOTransformation('lineThrough_text');
             }
             else {
-                makeLine();
+                textTransformation('lineThrough_text', true);
             }
         }
 
@@ -1044,7 +1007,7 @@ $(document).ready(() => {
     $('.save_btn').click(() => {
         let note_text = document.querySelector('.mytext');
         let title = $('.title').val();
-        if(title.includes(' ')){
+        if (title.includes(' ')) {
             title = title.replace(/\s/g, '_');
         }
         if (title.length !== 0) {
@@ -1057,7 +1020,7 @@ $(document).ready(() => {
                         if ($('.title').val() === keys[i].substring(5, keys[i].length).replace('_', ' ')) {
                             sameName++;
                         }
-                        else if ($(note_text).html() === localStorage.getItem(`${keys[i]}`)){
+                        else if ($(note_text).html() === localStorage.getItem(`${keys[i]}`)) {
                             localStorage.removeItem(`${keys[i]}`);
                         }
                     }
@@ -1072,13 +1035,13 @@ $(document).ready(() => {
                         sameName--;
                         window.location.reload();
                     }
-                    else{
+                    else {
                         sameName--;
                     }
                 }
 
                 else if (sameContent) {
-                    
+
                 }
 
                 else {
